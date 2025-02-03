@@ -1,0 +1,8 @@
+/* styles.css */
+.image {
+    width: 300px; /* Ajustar ancho fijo */
+    height: 300px; /* Ajustar alto fijo */
+    object-fit: cover; /* Mantener proporción y recortar si es necesario */
+    border-radius: 5px; /* Opcional: bordes redondeados */
+  }
+  
