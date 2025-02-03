@@ -1,4 +1,3 @@
-// firebaseConfig.js
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
@@ -12,6 +11,11 @@ const firebaseConfig = {
   measurementId: "G-RG8C07703S"
 };
 
-// Initialize Firebase
+// 🔥 Inicializa Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+
+// 🔥 Inicializa Firestore
+const db = getFirestore(app);
+
+// 📌 Exporta `db` correctamente
+export { db };

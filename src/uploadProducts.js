@@ -1,22 +1,17 @@
-import { db } from "./firebaseConfig.js"; // Asegúrate de la ruta
+import { db } from "./firebaseConfig.js";
 import { collection, addDoc } from "firebase/firestore";
-import products from "./mockProducts.js";
+import products from "./mockProducts.js"; // Asegúrate de que existe este archivo
 
-const uploadProducts = async () => {
-  console.log("🚀 Iniciando carga de productos en Firebase...");
+async function uploadProducts() {
+  const productsCollection = collection(db, "productos");
 
-  try {
-    const productsCollection = collection(db, "products"); // Cambia "products" por el nombre que prefieras
-
-    for (const product of products) {
-      const docRef = await addDoc(productsCollection, product);
-      console.log(`✅ Producto agregado: ${product.name} (ID: ${docRef.id})`);
-    }
-
-    console.log("🔥 TODOS LOS PRODUCTOS SE HAN SUBIDO A FIREBASE");
-  } catch (error) {
-    console.error("❌ Error al cargar productos:", error);
+  for (const product of products) {
+    await addDoc(productsCollection, product);
+    console.log(`Producto agregado: ${product.name}`);
   }
-};
 
-uploadProducts();
+  console.log("✅ Todos los productos han sido subidos a Firebase.");
+}
+
+// Ejecutar la función
+uploadProducts().catch(console.error);
