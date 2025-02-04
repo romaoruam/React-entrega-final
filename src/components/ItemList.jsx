@@ -1,23 +1,15 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import Item from "./Item";  // Asegúrate de que el componente esté importado
 
-function ItemList({ products }) {
+function ItemList({ productos }) {
+  if (!productos || productos.length === 0) {
+    return <h3>No hay productos disponibles...</h3>;
+  }
+
   return (
     <div className="row">
-      {products.map((product) => (
-        <div className="col-md-4 mb-4" key={product.id}>
-          <div className="card">
-            <img src={product.image} alt={product.name} className="image" />
-            <div className="card-body">
-              <h5 className="card-title">{product.name}</h5>
-              <p className="card-text">{product.description}</p>
-              <p className="card-text"><strong>Precio:</strong> ${product.price}</p>
-              <Link to={`/item/${product.id}`} className="btn btn-primary">
-                Ver Detalle
-              </Link>
-            </div>
-          </div>
-        </div>
+      {productos.map((producto) => (
+        <Item key={producto.id} producto={producto} />
       ))}
     </div>
   );

@@ -1,15 +1,24 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
 
-function Item({ product }) {
+function Item({ producto }) {
+  if (!producto) {
+    return <p>Cargando producto...</p>;
+  }
+
   return (
-    <div className="card">
-      <img src={product.image} className="card-img-top" alt={product.name} />
-      <div className="card-body">
-        <h5 className="card-title">{product.name}</h5>
-        <p className="card-text">{product.description}</p>
-        <p><strong>Precio: ${product.price.toFixed(2)}</strong></p>
-        <Link to={`/item/${product.id}`} className="btn btn-primary">Ver Detalle</Link>
+    <div className="col-md-4">
+      <div className="card">
+        <img
+          src={producto.image || "https://via.placeholder.com/150"}
+          className="card-img-top"
+          alt={producto.name || "Producto sin nombre"}
+        />
+        <div className="card-body">
+          <h5 className="card-title">{producto.name || "Producto sin nombre"}</h5>
+          <p className="card-text">{producto.description || "Sin descripción"}</p>
+          <p className="card-text">💰 ${producto.price || "Precio no disponible"}</p>
+          <button className="btn btn-primary">Ver más</button>
+        </div>
       </div>
     </div>
   );

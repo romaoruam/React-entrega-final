@@ -1,27 +1,32 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import ItemList from './ItemList';
-import products from '../mockProducts';
+import { useEffect, useState } from "react";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { useParams } from "react-router-dom";
+import { db } from "../firebaseConfig";
+import ItemList from "./ItemList";
 
-function ItemListContainer() {
-  const { categoryId } = useParams();
-  const [filteredProducts, setFilteredProducts] = useState([]);
+function ItemListContainer({ greeting }) {
+  const [productos, setProductos] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const { id } = useParams();
 
   useEffect(() => {
-    if (categoryId) {
-      const filtered = products.filter(
-        (product) => product.category === categoryId
-      );
-      setFilteredProducts(filtered);
-    } else {
-      setFilteredProducts(products);
-    }
-  }, [categoryId]);
+    setLoading(true);
+    const productosRef = collection(db, "productos");
+    const q = id ? query(productosRef, where("category", "==", id)) : productosRef;
+
+    getDocs(q)
+      .then((snapshot) => {
+        const items = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+        setProductos(items);
+      })
+      .catch((error) => console.error("Error al obtener productos:", error))
+      .finally(() => setLoading(false));
+  }, [id]);
 
   return (
     <div className="container mt-4">
-      <h2>{categoryId ? `Categoría: ${categoryId}` : 'Todos los Productos'}</h2>
-      <ItemList products={filteredProducts} />
+      <h2>{greeting}</h2>
+      {loading ? <h3>Cargando productos...</h3> : <ItemList productos={productos} />}
     </div>
   );
 }
