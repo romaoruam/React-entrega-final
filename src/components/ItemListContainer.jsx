@@ -1,34 +1,43 @@
 import { useEffect, useState } from "react";
-import { collection, getDocs, query, where } from "firebase/firestore";
 import { useParams } from "react-router-dom";
 import { db } from "../firebaseConfig";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import ItemList from "./ItemList";
 
-function ItemListContainer({ greeting }) {
-  const [productos, setProductos] = useState([]);
-  const [loading, setLoading] = useState(true);
+const ItemListContainer = ({ greeting }) => {
   const { id } = useParams();
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(true);
-    const productosRef = collection(db, "productos");
-    const q = id ? query(productosRef, where("category", "==", id)) : productosRef;
+    const fetchProducts = async () => {
+      try {
+        let productsRef = collection(db, "productos");
 
-    getDocs(q)
-      .then((snapshot) => {
-        const items = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-        setProductos(items);
-      })
-      .catch((error) => console.error("Error al obtener productos:", error))
-      .finally(() => setLoading(false));
+        if (id) {
+          productsRef = query(productsRef, where("category", "==", id));
+        }
+
+        const snapshot = await getDocs(productsRef);
+        const productList = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+        setProducts(productList);
+      } catch (error) {
+        console.error("Error obteniendo los productos:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
   }, [id]);
 
   return (
-    <div className="container mt-4">
-      <h2>{greeting}</h2>
-      {loading ? <h3>Cargando productos...</h3> : <ItemList productos={productos} />}
+    <div className="container mt-5">
+      <h2 className="text-center">{greeting}</h2>
+      {loading ? <h2 className="text-center mt-5">Cargando productos...</h2> : <ItemList products={products} />}
     </div>
   );
-}
+};
 
 export default ItemListContainer;

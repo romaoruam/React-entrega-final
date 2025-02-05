@@ -1,8 +1,35 @@
-/* styles.css */
-.image {
-    width: 300px; /* Ajustar ancho fijo */
-    height: 300px; /* Ajustar alto fijo */
-    object-fit: cover; /* Mantener proporción y recortar si es necesario */
-    border-radius: 5px; /* Opcional: bordes redondeados */
-  }
-  
+/* Solución para que todas las cards tengan el mismo tamaño */
+.card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Ajustamos el tamaño de las imágenes */
+.card-img-top {
+  height: 200px; /* Tamaño uniforme */
+  object-fit: cover;
+  width: 100%;
+  border-radius: 5px;
+}
+
+/* Distribución uniforme de los productos */
+.container {
+  margin-top: 100px; /* Asegura que el Navbar no tape el contenido */
+  padding-bottom: 50px;
+}
+
+/* Asegurar una cuadrícula estable en todas las categorías */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Mantener el tamaño uniforme de los botones */
+.btn {
+  width: 100%;
+  margin-top: 5px;
+}

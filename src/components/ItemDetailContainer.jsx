@@ -1,34 +1,52 @@
-import React, { useState, useEffect } from "react";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../firebaseConfig"; 
-import ItemList from "./ItemList";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { db } from "../firebaseConfig";
+import { doc, getDoc } from "firebase/firestore";
 
-function ItemListContainer({ greeting }) {
-  const [productos, setProductos] = useState([]);
+const ItemDetailContainer = () => {
+  const { id } = useParams();
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchProduct = async () => {
       try {
-        const productosSnapshot = await getDocs(collection(db, "productos"));
-        const productosList = productosSnapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data()
-        }));
-        setProductos(productosList);
+        const productRef = doc(db, "productos", id);
+        const productSnap = await getDoc(productRef);
+
+        if (productSnap.exists()) {
+          setProduct({ id: productSnap.id, ...productSnap.data() });
+        } else {
+          console.error("No existe el producto.");
+        }
       } catch (error) {
-        console.error("Error al obtener productos:", error);
+        console.error("Error obteniendo el producto:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
-    fetchData();
-  }, []);
+    fetchProduct();
+  }, [id]);
+
+  if (loading) return <h2 className="text-center mt-5">Cargando...</h2>;
+
+  if (!product) return <h2 className="text-center mt-5">Producto no encontrado</h2>;
 
   return (
-    <div className="container mt-4">
-      <h2>{greeting}</h2>
-      <ItemList productos={productos} />
+    <div className="container mt-5">
+      <div className="row">
+        <div className="col-md-6">
+          <img src={product.image} alt={product.name} className="img-fluid rounded shadow" />
+        </div>
+        <div className="col-md-6 d-flex flex-column justify-content-center">
+          <h2>{product.name}</h2>
+          <p className="text-muted">{product.description}</p>
+          <h4 className="fw-bold">Precio: ${product.price}</h4>
+        </div>
+      </div>
     </div>
   );
-}
+};
 
-export default ItemListContainer;
+export default ItemDetailContainer;
