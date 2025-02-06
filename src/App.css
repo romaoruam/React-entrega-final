@@ -1,33 +1,46 @@
-/* Asegurar que todo el contenido ocupa todo el ancho */
+/* Asegurar que el body y el html ocupen todo el ancho */
 html, body {
-  width: 100%;
   margin: 0;
   padding: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
   overflow-x: hidden;
 }
 
-/* Centrar y extender elementos */
-.container {
-  width: 100%;
-  max-width: 1400px;
-  margin: auto;
-  text-align: center;
-  padding: 20px;
-}
-
-/* Hacer que el NavBar ocupe toda la pantalla */
+/* Ajustar el NavBar para que sea fijo */
 .navbar {
   width: 100%;
-  max-width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background-color: #f8f9fa;
+  padding: 10px 0;
 }
 
-/* Asegurar que el mensaje de bienvenida esté centrado correctamente */
-.welcome-message {
+/* Asegurar que todo el contenido respete el ancho del NavBar */
+.main-content {
   width: 100%;
+  max-width: 1400px;
+  margin: 100px auto 0 auto;
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 80vh;
+  padding-top: 80px;
+}
+
+/* Asegurar que las secciones tengan el mismo ancho */
+.item-list-container, .contact-form, .map-container {
+  width: 100vw;
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 80px;
+}
+
+/* Asegurar que las imágenes de las cards sean uniformes */
+.card-img-top {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 5px;
 }

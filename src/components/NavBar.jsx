@@ -2,14 +2,13 @@ import { Link } from "react-router-dom";
 import CartWidget from "./CartWidget";
 import logo from "../assets/altas-cumbres-logo.png";
 
-
 const NavBar = () => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light w-100">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top w-100">
       <div className="container-fluid">
         {/* LOGO */}
         <Link className="navbar-brand fw-bold" to="/">
-          <img src={logo} alt="Altas Cumbres" style={{ height: "50px" }} /> {/* ✅ Logo restaurado */}
+          <img src={logo} alt="Altas Cumbres" style={{ height: "80px" }} /> {/* 🔥 Logo un poco más grande */}
         </Link>
 
         {/* BOTÓN RESPONSIVE */}

@@ -33,7 +33,7 @@ const ItemListContainer = ({ greeting }) => {
   }, [id]);
 
   return (
-    <div className="container mt-5">
+    <div className="container-fluid item-list-container mt-5">
       <h2 className="text-center">{greeting}</h2>
       {loading ? <h2 className="text-center mt-5">Cargando productos...</h2> : <ItemList products={products} />}
     </div>
