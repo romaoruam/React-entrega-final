@@ -1,20 +1,31 @@
-/* 🔥 Asegurar que el NavBar está fijo y ocupa todo el ancho */
-.navbar {
+/* 🔥 Asegurar que `body` y `html` ocupen todo el ancho y no tengan márgenes laterales */
+html, body {
   width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: #f8f9fa;
-  z-index: 1000; /* Para que siempre esté arriba */
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Evita desplazamientos laterales */
 }
 
-/* 🔥 Ajustamos el body para que el contenido no quede debajo del NavBar */
-body {
-  margin-top: 80px; /* El tamaño debe ser igual a la altura del NavBar */
+/* 🔥 Asegurar que `container-fluid` ocupa todo el ancho del body */
+.container-fluid {
+  width: 100%;
+  max-width: 100vw; /* Ocupar todo el ancho del viewport */
+  padding: 0;
+  margin: 0;
 }
 
-/* 🔥 Asegurar que los contenedores ocupen el ancho del body */
+/* 🔥 Asegurar que `container` no genera margen lateral */
 .container {
+  width: 100%;
+  max-width: 1400px; /* Para que no se haga demasiado grande en pantallas grandes */
+  margin: 0 auto; /* Centrar el contenido */
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* 🔥 Asegurar que las secciones están bien centradas */
+.section-container {
   width: 100%;
   max-width: 1400px;
   margin: auto;
@@ -22,10 +33,14 @@ body {
   padding: 20px;
 }
 
-/* 🔥 Asegurar que las imágenes de las cards sean uniformes */
-.card-img-top {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 5px;
+/* 🔥 Ajustes para evitar desplazamientos laterales en pantallas pequeñas */
+@media (max-width: 768px) {
+  .container {
+    max-width: 95%;
+    padding: 0 10px;
+  }
+  .section-container {
+    max-width: 95%;
+    padding: 15px;
+  }
 }

@@ -13,18 +13,17 @@ const ItemListContainer = ({ greeting }) => {
     const fetchProducts = async () => {
       try {
         let productsRef = collection(db, "productos");
-        let q = id ? query(productsRef, where("category", "==", id)) : productsRef;
 
-        const snapshot = await getDocs(q);
-        const productList = snapshot.docs.map((doc) => ({
-          id: doc.id, // 🔥 Usamos el ID real de Firestore
-          ...doc.data(),
-        }));
+        if (id) {
+          productsRef = query(productsRef, where("category", "==", id));
+        }
 
-        console.log("📌 Productos obtenidos:", productList); // 🔥 Log para ver los ID correctos
+        const snapshot = await getDocs(productsRef);
+        const productList = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
         setProducts(productList);
       } catch (error) {
-        console.error("❌ Error obteniendo los productos:", error);
+        console.error("Error obteniendo los productos:", error);
       } finally {
         setLoading(false);
       }
@@ -34,9 +33,11 @@ const ItemListContainer = ({ greeting }) => {
   }, [id]);
 
   return (
-    <div className="container mt-5">
-      <h2 className="text-center">{greeting}</h2>
-      {loading ? <h2 className="text-center mt-5">Cargando productos...</h2> : <ItemList products={products} />}
+    <div className="container-fluid">
+      <div className="section-container">
+        <h2 className="text-center">{greeting}</h2>
+        {loading ? <h2 className="text-center mt-5">Cargando productos...</h2> : <ItemList products={products} />}
+      </div>
     </div>
   );
 };
