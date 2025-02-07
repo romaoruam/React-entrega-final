@@ -1,43 +1,28 @@
-/* Asegurar que el body y el html ocupen todo el ancho */
-html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
-  overflow-x: hidden;
-}
-
-/* Ajustar el NavBar para que sea fijo */
+/* 🔥 Asegurar que el NavBar está fijo y ocupa todo el ancho */
 .navbar {
   width: 100%;
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1000;
   background-color: #f8f9fa;
-  padding: 10px 0;
+  z-index: 1000; /* Para que siempre esté arriba */
 }
 
-/* Asegurar que todo el contenido respete el ancho del NavBar */
-.main-content {
+/* 🔥 Ajustamos el body para que el contenido no quede debajo del NavBar */
+body {
+  margin-top: 80px; /* El tamaño debe ser igual a la altura del NavBar */
+}
+
+/* 🔥 Asegurar que los contenedores ocupen el ancho del body */
+.container {
   width: 100%;
   max-width: 1400px;
-  margin: 100px auto 0 auto;
+  margin: auto;
   text-align: center;
-  padding-top: 80px;
+  padding: 20px;
 }
 
-/* Asegurar que las secciones tengan el mismo ancho */
-.item-list-container, .contact-form, .map-container {
-  width: 100vw;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  padding-top: 80px;
-}
-
-/* Asegurar que las imágenes de las cards sean uniformes */
+/* 🔥 Asegurar que las imágenes de las cards sean uniformes */
 .card-img-top {
   width: 100%;
   height: 200px;

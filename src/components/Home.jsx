@@ -1,12 +1,13 @@
-import React from 'react';
+import logo from "../assets/altas-cumbres-logo.png";
 
-function Home() {
+const Home = () => {
   return (
-    <div className="container mt-4">
-      <h1>¡Bienvenidos a Altas Cumbres!</h1>
-      <p>Los mejores sándwiches de miga están aquí.</p>
+    <div className="container d-flex flex-column justify-content-center align-items-center text-center" style={{ minHeight: "80vh" }}>
+      <h1 className="fw-bold">Bienvenidos a Altas Cumbres</h1>
+      <img src={logo} alt="Altas Cumbres" style={{ width: "300px", marginTop: "20px" }} /> {/* ✅ Logo grande */}
+      <p className="lead mt-3">Los mejores sándwiches de miga están aquí.</p>
     </div>
   );
-}
+};
 
 export default Home;
