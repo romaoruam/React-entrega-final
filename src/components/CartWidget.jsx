@@ -1,10 +1,12 @@
-import React from 'react';
+import { useCart } from "../context/CartContext";
 
 function CartWidget() {
+  const { totalItems } = useCart();
+
   return (
     <div>
       <i className="bi bi-cart4"></i>
-      <span className="badge bg-secondary">3</span>
+      {totalItems > 0 && <span className="badge bg-secondary">{totalItems}</span>}
     </div>
   );
 }

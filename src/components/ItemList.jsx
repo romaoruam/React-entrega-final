@@ -9,7 +9,15 @@ const ItemList = ({ products = [] }) => {
     <div className="container">
       <div className="row row-cols-1 row-cols-md-3 g-4">
         {products.map((product) => (
-          <Item key={product.id} {...product} />
+          <Item 
+            key={product.id} 
+            id={product.id}  // ✅ Pasamos el ID correcto de Firestore
+            name={product.name} 
+            image={product.image} 
+            price={product.price} 
+            description={product.description} 
+            stock={product.stock} 
+          />
         ))}
       </div>
     </div>
