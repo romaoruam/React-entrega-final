@@ -7,6 +7,7 @@ import ItemDetailContainer from "./components/ItemDetailContainer";
 import Sucursal from "./components/Sucursal";
 import Contacto from "./components/Contacto";
 import Cart from "./components/Cart";
+import CheckoutForm from "./components/CheckoutForm"; // ✅ Nueva importación
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
               <Route path="/sucursal" element={<Sucursal />} />
               <Route path="/contacto" element={<Contacto />} />
               <Route path="/cart" element={<Cart />} />
+              <Route path="/checkout" element={<CheckoutForm />} /> {/* ✅ Nueva ruta */}
             </Routes>
           </div>
         </div>

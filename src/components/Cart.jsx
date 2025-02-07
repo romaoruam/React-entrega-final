@@ -29,6 +29,9 @@ const Cart = () => {
         ))}
         <h4 className="mt-3">Total: ${getTotalPrice()}</h4>
         <button className="btn btn-danger mt-3" onClick={clearCart}>Vaciar Carrito</button>
+
+        {/* ✅ Nuevo botón para finalizar la compra */}
+        <Link to="/checkout" className="btn btn-success mt-3">Finalizar Compra</Link>
       </div>
     </div>
   );
