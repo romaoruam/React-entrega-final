@@ -22,9 +22,10 @@ const ItemCount = ({ stock, initial = 1, onAdd }) => {
           +
         </button>
       </div>
-      <button className="btn btn-primary mt-2" onClick={() => onAdd(quantity)}>
+      <button className="btn btn-primary mt-2" onClick={() => onAdd(quantity)} disabled={stock === 0}>
         🛒 Agregar al carrito
       </button>
+      {stock === 0 && <p className="text-danger mt-2">❌ Producto sin stock</p>}
     </div>
   );
 };

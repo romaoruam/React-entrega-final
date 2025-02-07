@@ -8,7 +8,7 @@ const ItemDetail = ({ product }) => {
 
   const handleAdd = (quantity) => {
     addToCart(product, quantity);
-    setAddedToCart(true);
+    setAddedToCart(true); // ✅ Oculta el contador tras agregar al carrito
   };
 
   return (
@@ -20,7 +20,7 @@ const ItemDetail = ({ product }) => {
           <p>{product.description}</p>
           <p><strong>Precio: ${product.price}</strong></p>
 
-          {/* Mostrar botón "Agregar al carrito" mientras no se haya agregado */}
+          {/* ✅ Mostrar botón "Agregar al carrito" mientras no se haya agregado */}
           {!addedToCart ? (
             <ItemCount stock={product.stock} initial={1} onAdd={handleAdd} />
           ) : (
